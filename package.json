@@ -1,0 +1,13 @@
+{
+  "name": "fruit-reversi",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "start": "node server/app.js",
+    "check": "node --check game.js && node --check engine.js && node --check server/app.js",
+    "dev": "node server/app.js",
+    "build": "node tools/build.mjs"
+  }
+}

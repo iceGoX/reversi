@@ -1,0 +1,16 @@
+.local/
+.data/
+dist/
+*.log
+__pycache__/
+node_modules/
+.DS_Store
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.agents/
+.obelisk/
+assets/source/
+design/

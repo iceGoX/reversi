@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f9f7ef"><meta name="description" content="和朋友，翻转一场小小的胜负。创建双人房间，开始一局黑白棋。"><title>黑白棋 · 和朋友一起翻转</title><link rel="icon" href="assets/guava-v2.jpg"><link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header"><button class="brand" id="brand">黑白棋</button><button class="quiet" id="rules">玩法规则</button></header>
+<main>
+<section id="home" class="entry-page">
+ <div class="intro"><h1 id="intro-title">落一子，<br>换个局面。</h1><p class="intro-copy">和朋友，翻转一场小小的胜负。</p><div class="hero-pieces" aria-hidden="true"><span class="coin guava-coin"><img src="assets/guava-v2.jpg" alt=""></span><span class="coin grape-coin"><img src="assets/grape.jpg" alt=""></span></div><p class="eyebrow">两个人 · 六十四格 · 无数种可能</p></div>
+ <div class="entry-panel"><h2 id="entry-title">开始一局</h2><div class="tabs" role="tablist" aria-label="进入方式"><button id="create-tab" role="tab" aria-selected="true">创建房间</button><button id="join-tab" role="tab" aria-selected="false">加入房间</button></div>
+ <form id="entry-form"><label for="nickname">你的昵称</label><input id="nickname" name="nickname" maxlength="12" placeholder="怎么称呼你？" autocomplete="nickname" required><div id="room-field" hidden><label for="room-code">房间号</label><input id="room-code" name="room" maxlength="6" minlength="6" pattern="[A-Za-z0-9]{6}" placeholder="六位字母或数字" autocomplete="off" autocapitalize="characters" spellcheck="false"></div><div class="entry-description" id="create-description"><h3>双人好友房</h3><p>创建后，把房间号或邀请链接发给朋友。</p></div><p class="form-error" id="entry-error" role="alert"></p><button class="primary full" id="entry-submit">创建房间</button></form>
+ <button id="resume-room" class="secondary full" hidden>回到我的房间</button><div class="local-options"><button id="local">同屏双人</button><span aria-hidden="true">/</span><button id="ai">人机练习</button></div><p class="entry-foot">不用注册，坐下就能玩。</p></div>
+</section>
+<section id="waiting" class="entry-page" hidden><div class="intro"><h1>留个位子，<br>等你一起。</h1><p class="intro-copy">发出邀请，下一步就交给你们。</p><div class="hero-pieces" aria-hidden="true"><span class="coin guava-coin"><img src="assets/guava-v2.jpg" alt=""></span><span class="coin grape-coin"><img src="assets/grape.jpg" alt=""></span></div></div><div class="entry-panel wait-panel"><p class="eyebrow">房间号</p><h2 id="waiting-code" class="room-code"></h2><p class="muted">分享房间号，或复制邀请链接</p><button id="copy-wait" class="secondary full">复制邀请链接</button><div id="waiting-members" class="waiting-members"></div><p id="waiting-status" class="status" role="status">等待好友加入…</p><button id="start" class="primary full" disabled>等待好友加入</button><button id="swap-wait" class="secondary full swap-button">交换先后手</button><button id="leave-wait" class="quiet leave-wait">离开房间</button></div></section>
+<section id="play-page" class="play-page" hidden>
+ <div class="board-column"><div class="board-wrap"><div class="coordinates top" aria-hidden="true"></div><div class="coordinates left" aria-hidden="true"></div><div id="board" class="board" role="grid" aria-label="8行8列黑白棋棋盘"></div></div></div>
+ <aside class="game-info"><p class="eyebrow" id="mode-label">好友对局</p><h2 id="turn" aria-live="polite">轮到你落子</h2><p id="notice" class="notice" role="status">选择圆点，翻转对手的棋子。</p><div class="scores"><div class="player" id="player-guava"><span class="coin guava-coin" aria-hidden="true"><img src="assets/guava-v2.jpg" alt=""></span><div><h3 id="guava-name">芭乐</h3><span class="player-note" id="guava-note">先手</span></div><strong id="guava-score">2</strong></div><div class="player" id="player-grape"><span class="coin grape-coin" aria-hidden="true"><img src="assets/grape.jpg" alt=""></span><div><h3 id="grape-name">青提</h3><span class="player-note" id="grape-note">后手</span></div><strong id="grape-score">2</strong></div></div><p class="connection" id="connection" role="status"></p><div class="game-actions"><button id="resign" class="secondary full">认输</button><button id="restart" class="secondary full">重新开始</button><button id="swap-game" class="secondary full" hidden>交换先后手</button><button id="leave-game" class="secondary full">离开对局</button></div><p class="game-tip">夹住就翻转。最后棋子多的一方获胜。</p></aside>
+</section>
+</main>
+<dialog id="modal" aria-labelledby="modal-title"><form method="dialog"><button class="close-dialog" aria-label="关闭弹窗">关闭</button></form><div id="modal-content"></div></dialog>
+<div id="toast" class="toast" role="status" hidden></div><script type="module" src="game.js"></script>
+</body></html>
