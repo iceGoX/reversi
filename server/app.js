@@ -29,9 +29,10 @@ export function createApp({root=ROOT,dataDir=process.env.DATA_DIR||path.join(ROO
    if(!p.startsWith('/api/')){
     if(!['GET','HEAD'].includes(req.method))fail('方法不支持',405);
     const f=decodeURIComponent(p).slice(1)||'index.html';
-    if(!/^(index\.html|game\.js|engine\.js|style\.css|release\.json|assets\/[a-zA-Z0-9_-]+\.jpg)$/.test(f))fail('页面不存在',404);
+    const iconFiles=new Set(["assets/icons/favicon-32-v1.png", "assets/icons/apple-touch-icon-v1.png", "assets/icons/favicon-v1.svg"]);
+    if(!/^(index\.html|game\.js|engine\.js|style\.css|release\.json|assets\/[a-zA-Z0-9_-]+\.jpg)$/.test(f)&&!iconFiles.has(f))fail('页面不存在',404);
     const full=path.join(root,f);if(!fs.existsSync(full))fail('页面不存在',404);
-    const types={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.jpg':'image/jpeg','.json':'application/json'};
+    const types={'.png':'image/png','.svg':'image/svg+xml','.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.jpg':'image/jpeg','.json':'application/json'};
     res.setHeader('Content-Type',types[path.extname(full)]);res.setHeader('Cache-Control','no-cache');res.setHeader('Content-Security-Policy',"default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'self'");
     if(req.method==='HEAD')return res.end();return fs.createReadStream(full).pipe(res);
    }
